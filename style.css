@@ -4008,3 +4008,12 @@ a:hover {
     gap: var(--space-sm);
   }
 }
+.voice-btn.recording {
+    background: #ffecec !important;
+    color: #e74c3c !important;
+    animation: pulse-mic 1.5s infinite;
+}
+@keyframes pulse-mic {
+    0%,100% { box-shadow: 0 0 0 0 #e74c3c44; }
+    50%     { box-shadow: 0 0 0 10px #e74c3c22; }
+}

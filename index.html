@@ -9,6 +9,59 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<script>
+  // SpeechRecognition setup
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let recognition;
+  if (SpeechRecognition) {
+      recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-IN'; // default
+  } else {
+      alert("Voice input not supported. Use Chrome/Edge browser.");
+  }
+
+  // Get elements
+  const userInput = document.getElementById('userInput');
+  const voiceBtn = document.querySelector('.voice-btn');
+  let isRecording = false;
+
+  function toggleVoiceInput() {
+      if (!recognition) return;
+      if (isRecording) {
+          recognition.stop();
+      } else {
+          recognition.start();
+      }
+  }
+
+  if (recognition) {
+      recognition.onstart = function() {
+          isRecording = true;
+          voiceBtn.classList.add('recording');
+          userInput.placeholder = "Listening... Speak now!";
+      };
+      recognition.onend = function() {
+          isRecording = false;
+          voiceBtn.classList.remove('recording');
+          userInput.placeholder = "Describe your situation in detail...";
+      };
+      recognition.onerror = function(event) {
+          isRecording = false;
+          voiceBtn.classList.remove('recording');
+          alert("Voice input error: " + event.error);
+      };
+      recognition.onresult = function(event) {
+          const transcript = event.results[0][0].transcript;
+          userInput.value = transcript;
+          userInput.focus();
+          isRecording = false;
+          voiceBtn.classList.remove('recording');
+      };
+  }
+</script>
+
 <body>
     <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen">
