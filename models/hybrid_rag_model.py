@@ -5,6 +5,8 @@ from typing import List, Dict, Tuple
 from dataclasses import dataclass
 import logging
 
+
+
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from faiss import IndexFlatL2, write_index, read_index
 from rank_bm25 import BM25Okapi
@@ -56,7 +58,7 @@ class NyaySaathiHybridRAG:
         logger.info("✓ Loaded cross-encoder reranker")
 
         # Load LLM
-        self.llm_client = OpenAI(api_key=OPENAI_API_KEY)
+        self.llm_client = OpenAI(api_key="AIzaSyC4oU9v2wmtK5B8XR6oFHTwI_ghbPZI2ZY")
         logger.info("✓ Initialized OpenAI LLM")
 
         # Load dataset
@@ -117,8 +119,8 @@ class NyaySaathiHybridRAG:
         )
 
         # Initialize FAISS index
-        dimension = embeddings.shape
-        self.faiss_index = IndexFlatL2(dimension)
+        dimension = embeddings.shape[1]
+        self.faiss_index = IndexFlatL2(int(dimension))
         self.faiss_index.add(embeddings)
         logger.info(f"✓ FAISS index created: {len(embeddings)} cases")
 

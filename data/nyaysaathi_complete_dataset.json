@@ -16,6 +16,7 @@
       "Legal News Archives"
     ],
     "features_supported": [
+
       "similar_case_storytelling",
       "case_risk_classification",
       "automated_case_summary",

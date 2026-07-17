@@ -10,9 +10,9 @@ DATA_PATH = PROJECT_ROOT / "data"
 DATASET_PATH = DATA_PATH
 
 # Model Configuration
-EMBEDDING_MODEL = "BAAI/bge-large-en-v1.5"
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 LLM_MODEL = "gpt-4o-mini"
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "sk-your-key-here")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "AIzaSyC4oU9v2wmtK5B8XR6oFHTwI_ghbPZI2ZY")
 
 # Vector DB Configuration
 VECTORSTORE_PATH = DATA_PATH / "vectorstore"
